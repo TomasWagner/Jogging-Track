@@ -6,12 +6,16 @@ import { Record } from '@/_models';
 export class RecordService {
     constructor(private http: HttpClient) { }
 
+    add(record: Record) {
+        return this.http.post(`${config.apiUrl}/records/`, record);
+    }
+
     getAll() {
         return this.http.get<Record[]>(`${config.apiUrl}/records/`);
     }
 
     getById(id: number) {
-        return this.http.get(`${config.apiUrl}/records/${id}`);
+        return this.http.get<Record>(`${config.apiUrl}/records/${id}/`);
     }
 
     update(user: Record) {
@@ -19,6 +23,6 @@ export class RecordService {
     }
 
     delete(id: number) {
-        return this.http.delete(`${config.apiUrl}/records/${id}`);
+        return this.http.delete(`${config.apiUrl}/records/${id}/`);
     }
 }

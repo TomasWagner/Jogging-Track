@@ -7,10 +7,10 @@ import { UserService, AuthenticationService, RecordService} from '@/_services';
 import {Router} from '@angular/router';
 
 @Component({ 
-    templateUrl: 'record.component.html', 
-    styleUrls: ['record.component.css'],
+    templateUrl: 'record_list.component.html', 
+    styleUrls: ['record_list.component.css'],
 })
-export class RecordComponent implements OnInit, OnDestroy {
+export class RecordListComponent implements OnInit, OnDestroy {
     currentUser: User;
     currentUserSubscription: Subscription;
     records: Record[] = [];
@@ -38,13 +38,16 @@ export class RecordComponent implements OnInit, OnDestroy {
         this.recordService.delete(id).pipe(first()).subscribe();
         this.loadAllRecords();
     }
+    updateRecord(id:number) {
+        this.router.navigate(['records/one/', id])
+    }
     // deleteUser(id: number) {
     //     this.userService.delete(id).pipe(first()).subscribe(() => {
     //         this.loadAllUsers()
     //     });
     // }
     addRecord() {
-        this.router.navigate(['record_add'])
+        this.router.navigate(['records/add'])
     }
     private loadAllRecords() {
         this.recordService.getAll().pipe(first()).subscribe(records => {

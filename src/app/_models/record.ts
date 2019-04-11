@@ -1,5 +1,5 @@
 ﻿export class Record {
-    id: number;
+    id?: number;
     date: string;
     distance: string;
     time: string;

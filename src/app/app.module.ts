@@ -13,20 +13,25 @@ import { AlertComponent } from './_components';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
-import { RecordComponent } from './record';
+import { RecordListComponent } from './record_list';
 import { UserComponent } from './user';
 import { RegisterComponent } from './register';
-import {RecordAddComponent} from './record_add';
+import {RecordDetailComponent} from './record_detail';
 
 
 //Material-Ui Modules
+import {MatNativeDateModule} from '@angular/material'
 import {MatTableModule} from '@angular/material/table'
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
-
+import {MatInputModule} from '@angular/material/input';
+import {MatDatepickerModule, } from '@angular/material/datepicker';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import {MatCardModule} from '@angular/material/card';
+import {DatePipe} from '@angular/common'
 @NgModule({
     imports: [
         BrowserModule,
@@ -39,6 +44,11 @@ import {MatSelectModule} from '@angular/material/select';
         MatButtonModule,
         MatFormFieldModule,
         MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatInputModule,
+        BrowserAnimationsModule,
+        MatCardModule,
     ],
     declarations: [
         AppComponent,
@@ -46,14 +56,14 @@ import {MatSelectModule} from '@angular/material/select';
         HomeComponent,
         LoginComponent,
         RegisterComponent,
-        RecordComponent,
+        RecordListComponent,
         UserComponent,
-        RecordAddComponent,
+        RecordDetailComponent,
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-
+        DatePipe,
         // provider used to create fake backend
        // fakeBackendProvider
     ],

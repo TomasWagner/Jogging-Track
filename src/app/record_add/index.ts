@@ -1,1 +1,0 @@
-﻿export * from './record_add.component';
