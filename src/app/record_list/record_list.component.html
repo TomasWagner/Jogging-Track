@@ -1,54 +1,89 @@
-﻿<button mat-raised-button (click)="addRecord()">Add Record</button>
-<br>
-<br>
-<table mat-table [dataSource]="records" class="mat-elevation-z8">
+﻿<div class="row">
+  <div class="col-sm-8 offset-sm-2">
+    <br>
+    <br>
+    <button mat-raised-button (click)="addRecord()">Add Record</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button (click)="showWeeklyReport()" mat-raised-button color="primary">Weekly Report</button>
+    <!--
+      Filter Form
+    -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <form [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+      <mat-form-field class="example-full-width">
+        <input matInput [matDatepicker]="fromDatePicker" placeholder="From" formControlName="fromDate">
+        <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #fromDatePicker></mat-datepicker>
+        <mat-error *ngIf="f.fromDate.hasError('required')">
+            Date is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <mat-form-field class="example-full-width">
+        <input matInput [matDatepicker]="toDatePicker" placeholder="To" formControlName="toDate">
+        <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #toDatePicker></mat-datepicker>
+        <mat-error *ngIf="f.toDate.hasError('required')">
+            Date is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <button [disabled]="!filterForm.valid" (click)="onSubmit()" mat-raised-button color="primary">Filter</button>
+    </form>
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-  
-    <!-- Position Column -->
-  
-    <!-- Name Column -->
-    <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> Id </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
+    <table mat-table [dataSource]="records" class="mat-elevation-z8">
 
-    <ng-container matColumnDef="user">
-        <th mat-header-cell *matHeaderCellDef> User </th>
-        <td mat-cell *matCellDef="let element"> {{element.user.username}} </td>
-    </ng-container>
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+      
+        <!-- Position Column -->
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="date">
-      <th mat-header-cell *matHeaderCellDef> Date </th>
-      <td mat-cell *matCellDef="let element"> {{element.date}} </td>
-    </ng-container>
-  
-    <!-- Weight Column -->
-    <ng-container matColumnDef="distance">
-      <th mat-header-cell *matHeaderCellDef> Distance </th>
-      <td mat-cell *matCellDef="let element"> {{element.distance}} </td>
-    </ng-container>
-  
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="time">
-      <th mat-header-cell *matHeaderCellDef> Time </th>
-      <td mat-cell *matCellDef="let element"> {{element.time}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="update">
-    <th mat-header-cell *matHeaderCellDef> Update </th>
-    <td mat-cell *matCellDef="let element"> 
-        <button mat-raised-button (click)="updateRecord(element.id)">update</button> 
-    </td>
-    </ng-container>
+        <ng-container matColumnDef="user">
+            <th mat-header-cell *matHeaderCellDef> User </th>
+            <td mat-cell *matCellDef="let element"> {{element.user.username}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="delete">
-    <th mat-header-cell *matHeaderCellDef> Delete </th>
-    <td mat-cell *matCellDef="let element"> 
-        <button mat-raised-button (click)="deleteRecord(element.id)">delete</button>  
-    </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef> Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+        </ng-container>
+      
+        <!-- Weight Column -->
+        <ng-container matColumnDef="distance">
+          <th mat-header-cell *matHeaderCellDef> Distance </th>
+          <td mat-cell *matCellDef="let element"> {{element.distance}} </td>
+        </ng-container>
+      
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="time">
+          <th mat-header-cell *matHeaderCellDef> Time </th>
+          <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="update">
+        <th mat-header-cell *matHeaderCellDef> Update </th>
+        <td mat-cell *matCellDef="let element"> 
+            <button mat-raised-button (click)="updateRecord(element.id)">update</button> 
+        </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef> Delete </th>
+        <td mat-cell *matCellDef="let element"> 
+            <button mat-raised-button (click)="deleteRecord(element.id)">delete</button>  
+        </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>

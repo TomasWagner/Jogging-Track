@@ -1,0 +1,52 @@
+﻿<h1 mat-dialog-title>Weekly Report</h1>
+<div mat-dialog-content>
+    <table mat-table [dataSource]="data">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+    
+      <!-- Position Column -->
+    
+      <!-- Name Column -->
+      <ng-container matColumnDef="index">
+          <th mat-header-cell *matHeaderCellDef> # </th>
+          <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="year">
+          <th mat-header-cell *matHeaderCellDef> Year </th>
+          <td mat-cell *matCellDef="let element"> {{element.year}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="week">
+        <th mat-header-cell *matHeaderCellDef> Week </th>
+        <td mat-cell *matCellDef="let element"> {{element.week}} </td>
+      </ng-container>
+    
+      <!-- Weight Column -->
+      <ng-container matColumnDef="totalDistance">
+        <th mat-header-cell *matHeaderCellDef> Distance </th>
+        <td mat-cell *matCellDef="let element"> {{element.totalDistance}} </td>
+      </ng-container>
+    
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="totalTime">
+        <th mat-header-cell *matHeaderCellDef> Time </th>
+        <td mat-cell *matCellDef="let element"> {{element.totalTime}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="avgSpeed">
+      <th mat-header-cell *matHeaderCellDef> Avg Speed </th>
+      <td mat-cell *matCellDef="let element"> 
+        {{element.totalDistance/element.totalTime}}
+      </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="data.animal" style="margin-left: 500px;" cdkFocusInitial>Close</button>
+</div>
+

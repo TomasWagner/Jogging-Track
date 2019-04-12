@@ -1,13 +1,22 @@
 ﻿import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
-import { Record } from '@/_models';
-
+import { Record, Filter, WeeklyData} from '@/_models';
 @Injectable({ providedIn: 'root' })
 export class RecordService {
+    fromDate: string;
+    toDate: string;
     constructor(private http: HttpClient) { }
 
     add(record: Record) {
         return this.http.post(`${config.apiUrl}/records/`, record);
+    }
+
+    filter(filter: Filter) {
+        return this.http.get<Record[]>(`${config.apiUrl}/records/?fromDate=${filter.fromDate}&toDate=${filter.toDate}`);
+    }
+
+    getWeeklyData() {
+        return this.http.get<WeeklyData[]>(`${config.apiUrl}/records/get_weeklydata/`);
     }
 
     getAll() {

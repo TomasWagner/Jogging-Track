@@ -13,10 +13,12 @@ import { AlertComponent } from './_components';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
-import { RecordListComponent } from './record_list';
-import { UserComponent } from './user';
+import { RecordListComponent, DialogOverviewExampleDialog} from './record_list';
+import { UserListComponent } from './user_list';
+import { UserDetailComponent} from './user_detail';
 import { RegisterComponent } from './register';
 import {RecordDetailComponent} from './record_detail';
+
 
 
 //Material-Ui Modules
@@ -32,6 +34,8 @@ import {MatDatepickerModule, } from '@angular/material/datepicker';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import {MatCardModule} from '@angular/material/card';
 import {DatePipe} from '@angular/common'
+import {MatDialogModule} from '@angular/material/dialog';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -49,6 +53,7 @@ import {DatePipe} from '@angular/common'
         MatInputModule,
         BrowserAnimationsModule,
         MatCardModule,
+        MatDialogModule
     ],
     declarations: [
         AppComponent,
@@ -57,8 +62,13 @@ import {DatePipe} from '@angular/common'
         LoginComponent,
         RegisterComponent,
         RecordListComponent,
-        UserComponent,
+        UserListComponent,
+        UserDetailComponent,
         RecordDetailComponent,
+        DialogOverviewExampleDialog
+    ],
+    entryComponents: [
+        DialogOverviewExampleDialog
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
